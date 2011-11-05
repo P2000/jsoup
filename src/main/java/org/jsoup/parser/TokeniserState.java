@@ -182,11 +182,12 @@ enum TokeniserState {
         // from < or </ in data, will have start or end tag pending
         void read(Tokeniser t, CharacterReader r) {
             // previous TagOpen state did NOT consume, will have a letter char in current
-            String tagName = r.consumeToAny('\t', '\n', '\f', ' ', '/', '>', nullChar).toLowerCase();
+            String tagName = r.consumeToAny('\t', '\r', '\n', '\f', ' ', '/', '>', nullChar).toLowerCase();
             t.tagPending.appendTagName(tagName);
 
             switch (r.consume()) {
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':
@@ -253,6 +254,7 @@ enum TokeniserState {
             char c = r.consume();
             switch (c) {
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':
@@ -320,6 +322,7 @@ enum TokeniserState {
                 char c = r.consume();
                 switch (c) {
                     case '\t':
+                    case '\r':
                     case '\n':
                     case '\f':
                     case ' ':
@@ -388,6 +391,7 @@ enum TokeniserState {
                 char c = r.consume();
                 switch (c) {
                     case '\t':
+                    case '\r':
                     case '\n':
                     case '\f':
                     case ' ':
@@ -563,6 +567,7 @@ enum TokeniserState {
                 char c = r.consume();
                 switch (c) {
                     case '\t':
+                    case '\r':
                     case '\n':
                     case '\f':
                     case ' ':
@@ -602,6 +607,7 @@ enum TokeniserState {
             char c = r.consume();
             switch (c) {
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':
@@ -726,6 +732,7 @@ enum TokeniserState {
             char c = r.consume();
             switch (c) {
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':
@@ -749,6 +756,7 @@ enum TokeniserState {
             char c = r.consume();
             switch (c) {
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':
@@ -789,12 +797,13 @@ enum TokeniserState {
     AttributeName {
         // from before attribute name
         void read(Tokeniser t, CharacterReader r) {
-            String name = r.consumeToAny('\t', '\n', '\f', ' ', '/', '=', '>', nullChar, '"', '\'', '<');
+            String name = r.consumeToAny('\t', '\r', '\n', '\f', ' ', '/', '=', '>', nullChar, '"', '\'', '<');
             t.tagPending.appendAttributeName(name.toLowerCase());
 
             char c = r.consume();
             switch (c) {
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':
@@ -832,6 +841,7 @@ enum TokeniserState {
             char c = r.consume();
             switch (c) {
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':
@@ -876,6 +886,7 @@ enum TokeniserState {
             char c = r.consume();
             switch (c) {
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':
@@ -980,13 +991,14 @@ enum TokeniserState {
     },
     AttributeValue_unquoted {
         void read(Tokeniser t, CharacterReader r) {
-            String value = r.consumeToAny('\t', '\n', '\f', ' ', '&', '>', nullChar, '"', '\'', '<', '=', '`');
+            String value = r.consumeToAny('\t', '\r', '\n', '\f', ' ', '&', '>', nullChar, '"', '\'', '<', '=', '`');
             if (value.length() > 0)
                 t.tagPending.appendAttributeValue(value);
 
             char c = r.consume();
             switch (c) {
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':
@@ -1030,6 +1042,7 @@ enum TokeniserState {
             char c = r.consume();
             switch (c) {
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':
@@ -1270,6 +1283,7 @@ enum TokeniserState {
             char c = r.consume();
             switch (c) {
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':
@@ -1298,6 +1312,7 @@ enum TokeniserState {
             char c = r.consume();
             switch (c) {
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':
@@ -1335,6 +1350,7 @@ enum TokeniserState {
                     t.transition(Data);
                     break;
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':
@@ -1364,7 +1380,7 @@ enum TokeniserState {
                 t.transition(Data);
                 return;
             }
-            if (r.matchesAny('\t', '\n', '\f', ' '))
+            if (r.matchesAny('\t', '\r', '\n', '\f', ' '))
                 r.advance(); // ignore whitespace
             else if (r.matches('>')) {
                 t.emitDoctypePending();
@@ -1386,6 +1402,7 @@ enum TokeniserState {
             char c = r.consume();
             switch (c) {
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':
@@ -1425,6 +1442,7 @@ enum TokeniserState {
             char c = r.consume();
             switch (c) {
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':
@@ -1517,6 +1535,7 @@ enum TokeniserState {
             char c = r.consume();
             switch (c) {
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':
@@ -1554,6 +1573,7 @@ enum TokeniserState {
             char c = r.consume();
             switch (c) {
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':
@@ -1590,6 +1610,7 @@ enum TokeniserState {
             char c = r.consume();
             switch (c) {
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':
@@ -1629,6 +1650,7 @@ enum TokeniserState {
             char c = r.consume();
             switch (c) {
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':
@@ -1721,6 +1743,7 @@ enum TokeniserState {
             char c = r.consume();
             switch (c) {
                 case '\t':
+                case '\r':
                 case '\n':
                 case '\f':
                 case ' ':

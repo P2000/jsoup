@@ -41,7 +41,7 @@ public class TextNode extends Node {
      @see #createFromEncoded(String, String)
      */
     public TextNode(String text, String baseUri) {
-        TextNode(text, baseUri);
+        this(text, -1, -1, baseUri);
     }
 
     public String nodeName() {
