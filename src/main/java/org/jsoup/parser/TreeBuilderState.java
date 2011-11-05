@@ -478,7 +478,7 @@ enum TreeBuilderState {
                                 startTag.attributes.get("prompt") :
                                 "This is a searchable index. Enter search keywords: ";
 
-                        tb.process(new Token.Character(prompt));
+                        tb.process(new Token.Character(prompt, -1, -1));
 
                         // input
                         Attributes inputAttribs = new Attributes();

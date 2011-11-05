@@ -222,7 +222,7 @@ class TreeBuilder {
         if (StringUtil.in(currentElement().tagName(), "script", "style"))
             node = new DataNode(characterToken.getData(), baseUri);
         else
-            node = new TextNode(characterToken.getData(), baseUri);
+            node = new TextNode(characterToken.getData(), characterToken.getBegin(), characterToken.getEnd(), baseUri);
         currentElement().appendChild(node); // doesn't use insertNode, because we don't foster these; and will always have a stack.
     }
 

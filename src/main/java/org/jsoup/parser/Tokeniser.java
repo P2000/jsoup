@@ -27,6 +27,7 @@ class Tokeniser {
     Token.Comment commentPending; // comment building up
     private Token.StartTag lastStartTag; // the last start tag emitted, to test appropriate end tag
     private boolean selfClosingFlagAcknowledged = true;
+    private int textBegin, textEnd;
 
     Tokeniser(CharacterReader reader) {
         this.reader = reader;
@@ -38,6 +39,7 @@ class Tokeniser {
             selfClosingFlagAcknowledged = true;
         }
 
+        textBegin = reader.pos();
         while (!isEmitPending)
             state.read(this, reader);
 
@@ -45,7 +47,7 @@ class Tokeniser {
         if (charBuffer.length() > 0) {
             String str = charBuffer.toString();
             charBuffer.delete(0, charBuffer.length());
-            return new Token.Character(str);
+            return new Token.Character(str, textBegin, textEnd);
         } else {
             isEmitPending = false;
             return emitPending;
@@ -74,10 +76,12 @@ class Tokeniser {
         // buffer strings up until last string token found, to emit only one token for a run of character refs etc.
         // does not set isEmitPending; read checks that
         charBuffer.append(str);
+        textEnd = reader.pos();
     }
 
     void emit(char c) {
         charBuffer.append(c);
+        textEnd = reader.pos();
     }
 
     TokeniserState getState() {

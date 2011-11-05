@@ -14,18 +14,34 @@ public class TextNode extends Node {
     them as needed on the fly.
      */
     private static final String TEXT_KEY = "text";
+    private final int begin, end;
     String text;
 
     /**
-     Create a new TextNode representing the supplied (unencoded) text).
+     Create a new TextNode representing the supplied (unencoded) text.
+
+     @param text raw text
+     @param begin start index of the text in the source document
+     @param end end index of the text in the source document
+     @param baseUri base uri
+     @see #createFromEncoded(String, String)
+     */
+    public TextNode(String text, int begin, int end, String baseUri) {
+        this.text = text;
+        this.begin = begin;
+        this.end = end;
+        this.baseUri = baseUri;
+    }
+
+    /**
+     Create a new TextNode representing the supplied (unencoded) text.
 
      @param text raw text
      @param baseUri base uri
      @see #createFromEncoded(String, String)
      */
     public TextNode(String text, String baseUri) {
-        this.baseUri = baseUri;
-        this.text = text;
+        TextNode(text, baseUri);
     }
 
     public String nodeName() {
@@ -67,6 +83,20 @@ public class TextNode extends Node {
      */
     public boolean isBlank() {
         return StringUtil.isBlank(getWholeText());
+    }
+
+    /**
+     @return the start index of the text in the source document
+     */
+    public int getBegin() {
+        return begin;
+    }
+
+    /**
+     @return the end index of the text in the source document
+     */
+    public int getEnd() {
+        return end;
     }
 
     /**

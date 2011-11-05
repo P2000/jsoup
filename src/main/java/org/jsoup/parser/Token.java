@@ -171,14 +171,25 @@ abstract class Token {
 
     static class Character extends Token {
         private final String data;
+        private final int begin, end;
 
-        Character(String data) {
+        Character(String data, int begin, int end) {
             type = TokenType.Character;
             this.data = data;
+            this.begin = begin;
+            this.end = end;
         }
 
         String getData() {
             return data;
+        }
+
+        int getBegin() {
+            return begin;
+        }
+
+        int getEnd() {
+            return end;
         }
 
         @Override
