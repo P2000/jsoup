@@ -3,9 +3,9 @@
   <modelVersion>4.0.0</modelVersion>
   <name>jsoup</name>
 
-  <groupId>org.jsoup</groupId>
+  <groupId>ch.pfeifer.jsoup</groupId>
   <artifactId>jsoup</artifactId>
-  <version>1.6.2-SNAPSHOT</version>
+  <version>1.6.2-with-text-offsets-1.0</version>
   <description>jsoup HTML parser</description>
   <url>http://jsoup.org/</url>
   <inceptionYear>2009</inceptionYear>
@@ -21,8 +21,8 @@
   	</license>  
   </licenses>
   <scm>
-  	<url>http://github.com/jhy/jsoup</url>
-    <connection>scm:git:git@github.com:jhy/jsoup.git</connection>
+  	<url>http://github.com/p2000/jsoup</url>
+    <connection>scm:git:git@github.com:p2000/jsoup.git</connection>
     <!-- <developerConnection>scm:git:git@github.com:jhy/jsoup.git</developerConnection> -->
   </scm>
   <organization>
@@ -105,15 +105,9 @@
   </build>
 
   <distributionManagement>
-    <snapshotRepository>
-      <id>sonatype-nexus-snapshots</id>
-      <name>Sonatype Nexus Snapshots</name>
-      <url>http://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
     <repository>
-      <id>sonatype-nexus-staging</id>
-      <name>Nexus Release Repository</name>
-      <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+      <id>gh-pages</id>
+      <url>file:///${basedir}/repository/</url>
     </repository>
   </distributionManagement>
 
