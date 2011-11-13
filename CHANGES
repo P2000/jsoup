@@ -1,5 +1,13 @@
 jsoup changelog
 
+*** Release 1.6.2-with-text-offsets-1.0 [2011-Nov-13]
+
+ * Fork, by Patrick Pfeifer
+
+ * Add methods to find the offset of text nodes in the original inut stream
+
+ * deploy on a github custom repository, as seen on http://chkal.blogspot.com/2010/09/maven-repositories-on-github.html
+
 *** Release 1.6.2 [PENDING]
  * Added jsoup.connect.cookies(Map) method, to set multiple cookies at once, possibly from a prior request.
 
